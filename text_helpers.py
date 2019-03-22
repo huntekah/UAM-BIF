@@ -5,7 +5,7 @@ import codecs
 
 def xor_strings(xs, ys,i=0):
     result = "".join(chr(ord(x) ^ ord(y)) for x, y in zip(xs[i:], ys))
-    print("XOR of {} and {} gives {}".format(xs,ys,result))
+    # print("XOR of {} and {} gives {}".format(xs,ys,result))
     return "".join(chr(ord(x) ^ ord(y)) for x, y in zip(xs[i:], ys))
 
 def byte_xor(xs,ys,i=0):
@@ -48,6 +48,15 @@ def is_ascii(word):
         if letter not in ascii_letters:
             return False
     return True
+
+def list_quality(list_of_ints):
+    garbage_counter = 0
+    for element in list_of_ints:
+        if chr(element) in ascii_letters + " ":
+            continue
+        garbage_counter += 1
+    quality = 1 - garbage_counter / len(list_of_ints)
+    return quality
 
 # word = "jakaś tam linijka"
 # string_to_hex(word)

@@ -29,6 +29,7 @@ def string_to_hex(s1):
 
 def show_hex_ciphers():
     line = "Jakaś tam linijka"
+    line = u"""os papierów z obliczeniami urósł. W pierwszej chwili Pirx myślał, że Langner mówi o kolacji, ale chodziło o rakietę. Pirx władował na siebie wypchany plecak. Langner miał jeszcze większy, wyładowany jakby kamieniami, potem się okazało, że oprócz koszul, my"""
     print(line)
     print(line.encode())
     print(line_to_hex( line.encode()))
@@ -38,6 +39,10 @@ def show_hex_ciphers():
     with open("XOR-ciphertext/088.xor","rb") as ciphertext:
         i = 2
         line = ciphertext.read(256)
+        print("start")
+        for letter in line:
+            print(type(letter))
+        print("end")
         # print(line.decode("UTF-8"))
         # line = binascii.a2b_uu("jakas laka")
         lineXOR = line_to_hex(line)
@@ -51,13 +56,13 @@ def show_hex_ciphers():
         # line = binascii.a2b_uu("jakas laka")
         lineXOR = line_to_hex(line)
         print("(HEX2).", lineXOR.decode("utf-8"))
-        while True:
-            i += 1
-            line = line_to_hex(ciphertext.read(256)).decode("utf-8")
-            if not line:
-                break
-            print("({}).".format(i), line)
-            print()
+        # while True:
+        #     i += 1
+        #     line = line_to_hex(ciphertext.read(256)).decode("utf-8")
+        #     if not line:
+        #         break
+        #     print("({}).".format(i), line)
+        #     print()
 
 
 PASSPHRASE = """ie. Zdaje się, że Langner coś do niego mówił, ale Pirx zasnął. W ubraniu. Zbudził się nagle : Langner, pochylony nad łóżkiem, dotknął jego ramienia.
