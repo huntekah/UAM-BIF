@@ -1,0 +1,272 @@
+------------------------------------------------------------------------
+INSTRUKCJA OBS£UGI ZESTAWU S£ÓW JÊZYKA POLSKIEGO DO PROGRAMU ISPELL
+------------------------------------------------------------------------
+
+wersja dokumentu: 20021113
+autor dokumentu: Miros³aw Prywata (Miroslaw.Prywata@fuw.edu.pl)
+
+
+SPIS TRE¦CI:
+
+1.  TWORZENIE I INSTALACJA
+1.1. AUTOMATYCZNE TWORZENIE S£OWNIKA (wersja testowa)
+1.2. ,,RÊCZNE'' TWORZENIE S£OWNIKA
+2.  PRZYK£ADOWY SPOSÓB TWORZENIA S£OWNIKA
+3.  INNE SYSTEMY OPERACYJNE I INNE SPOSOBY KODOWANIA POLSKICH LITER
+4.  U¯YCIE ZESTAWU S£ÓW Z INNYMI PROGRAMAMI DO SPRAWDZANIA PISOWNI
+5.  WSKAZÓWKI: CZEGO NIE NALE¯Y ROBIÆ !
+6.  JAK ZG£ASZAÆ B£ÊDY
+7.  KONTAKT Z AUTORAMI S£OWNIKA
+8.  OSOBY, KTÓRE BRA£Y UDZIA£ W SPRAWDZANIU S£OWNIKA 
+9.  PODZIÊKOWANIA
+
+1.  TWORZENIE I INSTALACJA
+
+1.1. AUTOMATYCZNE TWORZENIE S£OWNIKA
+
+1) Nale¿y w pliku slownik.cfg zaznaczyæ interesuj±ce s³owniki znakiem X
+2) Uruchomiæ polecenie
+  $ ./zbuduj.slownik.sh
+3) Przekopiowaæ polish.hash i polish.aff do /usr/lib/ispell
+
+4) do s³ownika na samym pocz±tku dodawane s± naczê¶ciej wystêpuj±ce w jêzyku
+   polskim wyrazy, co znacznie przyspiesza sprawdzanie tekstów, które
+   s± prawie ca³kowicie poprawne. Z dodatku tego mo¿na zrezygnowaæ
+   wykomentowuj±c liniê  $cp polish.dic.proto polish.dic 
+
+1.2. ,,RÊCZNE'' TWORZENIE S£OWNIKA
+
+A¿eby utworzyæ i zainstalowaæ polski s³ownik do ispella nale¿y:
+
+1) posiadaæ ispella pozwalaj±cego na u¿ywanie flag bêd±cych ma³ymi literami
+   (standardowy ispell z Red Hata tego nie potrafi)
+   
+2) wybraæ pliki z interesuj±cymi nas s³ownikami (na pewno A + B, w zale¿no¶ci
+   od potrzeb tak¿e i C oraz odpowiednie s³owniki fachowe - nazwy mówi± 
+   same za siebie) i dodawaæ je po kolei np.:
+   $ cat A >  polish.dic
+   $ cat B >> polish.dic
+   ..... tu inne interesuj±ce nas s³owniki ....
+   $ cat fachowe/chemia >> polish.dic
+   $ cat fachowe/polityka >> polish.dic
+
+3) wykonaæ polecenie
+   $ buildhash polish.dic polish.aff polish.hash
+   Plik polish.hash jest s³ownikiem czytanym bezpo¶rednio przez ispella.
+4) nale¿y skopiowaæ pliki:
+   polish.aff
+   polish.hash
+   do katalogu /usr/lib/ispell lub dowolnego innego w którym ispell defaultowo
+   szuka s³owników (patrz man ispell)
+
+UWAGA! (20020320)
+   Na pocz±tku s³ownika umieszczany jest plik polish.dic.proto (jest to pocz±tek
+   s³ownika frekwencyjnego uporz±dkowanego zgodnie z czêsto¶ci± wystêpowania
+   wyrazów w próbce tekstów zawieraj±cych ok. 3,5 mln wyrazów licz±c krotno¶ciami).
+   Powoduje to zwiêkszenie pliku hash i jednocze¶nie przyspieszenie dzia³ania
+   ispella (odpowied¼ na pytanie: jest s³owo, czy go nie ma s³owniku).
+
+UWAGA!
+   U¿ytkownicy Debiana mog± u¿yæ gotowego pakietu znajduj±cego siê w rozwojowej
+   dystrybucji potato.
+
+UWAGA!
+   Od wersji 19990914 zosta³ utworzony katalog dodatkowe, w którym umieszczane
+   s± s³owniki przysy³ane przez u¿ytkowników. W katalogu tym znajduje siê tak¿e
+   plik z opisem s³owników. Ka¿dy s³ownik fachowy/specjalistyczny/specyficzny
+   mo¿e zostaæ umieszczony w tym katalogu.
+
+2. PRZYK£ADOWY SPOSÓB TWORZENIA S£OWNIKA (czê¶ciowo nieaktualny - doszed³ plik
+polish.dic.proto)
+
+Postanawiamy u¿yæ tylko plików A, B, C
+
+[mirek@localhost test]$ cat A B C >ABC
+
+Mo¿emy zobaczyæ ile jest wyrazów w pliku ABC:
+
+[mirek@localhost test]$ wc ABC
+  91479   91479 1283489 ABC
+
+Teraz tworzymy s³ownik:
+
+[mirek@localhost test]$ buildhash ABC polish.aff ABC.hash
+Counting words in dictionary ...
+1000 2000 3000 4000 5000 6000 7000 8000 9000 10000 11000 12000 13000 14000
+15000 16000 17000 18000 19000 20000 21000 22000 23000 24000 25000 26000
+27000 28000 29000 30000 31000 32000 33000 34000 35000 36000 37000 38000
+39000 40000 41000 42000 43000 44000 45000 46000 47000 48000 49000 50000
+51000 52000 53000 54000 55000 56000 57000 58000 59000 60000 61000 62000
+63000 64000 65000 66000 67000 68000 69000 70000 71000 72000 73000 74000
+75000 76000 77000 78000 79000 80000 81000 82000 83000 84000 85000 86000
+87000 88000 89000 90000 91000
+91610 words
+0 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000 11000 12000 13000
+14000 15000 16000 17000 18000 19000 20000 21000 22000 23000 24000 25000
+26000 27000 28000 29000 30000 31000 32000 33000 34000 35000 36000 37000
+38000 39000 40000 41000 42000 43000 44000 45000 46000 47000 48000 49000
+50000 51000 52000 53000 54000 55000 56000 57000 58000 59000 60000 61000
+62000 63000 64000 65000 66000 67000 68000 69000 70000 71000 72000 73000
+74000 75000 76000 77000 78000 79000 80000 81000 82000 83000 84000 85000
+86000 87000 88000 89000 90000 91000
+
+Plik s³ownikowy (hash) nazwali¶my ABC.hash --- mo¿e siê on nazywaæ dowolnie,
+nale¿y tylko pamiêtaæ, ¿e wtedy bêdziemy musieli podawaæ ABC jako nazwê
+s³ownika.
+
+3.  INNE SYSTEMY OPERACYJNE I INNE SPOSOBY KODOWANIA POLSKICH LITER
+
+Zestawu s³ów mo¿na u¿ywaæ tak¿e pod innymi systemami operacyjnymi -- wszêdzie
+tam, gdzie uda siê przekompilowaæ ispella (patrz projekt DJGPP -- jest tam 
+ispell dla DOSa). Nale¿y wtedy
+1) zamieniæ wszystkie znaki wystêpuj±ce teraz w kodowaniu iso-8859-2 na nasze.
+   dotyczy to zbiorów ze s³owami a tak¿e pliku polish.aff. TeXnolodzy mog±
+   wykorzystaæ dowoln± notacjê, przy czym musz± to zapisaæ w pliku
+   polish.aff (wskazówk± mog± byæ pliki aff dla innych jêzyków, np.
+   niemieckiego --- w których s± ju¿ zrobione odpowiednie wpisy
+   charakterystyczne dla innych jêzyków). Chodzi tutaj o wpisy wordchars oraz
+   altstringtype, altstringchar.
+   Przyk³ad z francaise.aff
+   altstringtype "tex" "TeX" ".tex" ".bib"
+   
+   altstringchar   "\\`a"  à
+   altstringchar   "\\`A"  À
+   .........
+   itd   
+   
+   Do konwersji mo¿na u¿yæ np. programu konwert.
+
+2) Zamiast poleceñ cat, sort, itd nale¿y u¿yæ komend specyficznych dla
+   danego systemu operacyjnego. Sortowanie s³ownika przed wykonaniem
+   buildhash nie jest konieczne --- pozwala jednak na wychwycenie takich samych
+   wpisów (uniq)
+
+3) polish.hash i polish.aff nale¿y umie¶ciæ w miejscu specyficznym dla danego 
+   systemu operacyjnego lub podawaæ bezwzglêdn± ¶cie¿kê.
+
+4) do wersji 20000401 dodane zosta³y patche wprowadzaj±ce kodowanie specyficzne
+   dla babla (LaTeX) oraz encje SGML-owe i jednocze¶nie wyrzucone zosta³o
+   to z g³ownego affa. Wydaje siê, ¿e jest to jedyny rozs±dny sposób
+   wprowadzania  innych sposobów kodowania polskich liter przez ci±gi znaków.
+ 
+4. U¯YCIE ZESTAWU S£ÓW Z INNYMI PROGRAMAMI DO SPRAWDZANIA PISOWNI
+
+   W tej chwili nie znam programu (GPL), który by³by w stanie pomie¶ciæ
+   tak obszern± listê s³ów (1,4 mln wyrazów) w tak ma³ej objêto¶ci (4MB).
+   Pierwsz± rzecz± jest wyci±gniêcie pe³nej listy ze s³ownika.
+   Potrzebujemy do tego pliku hash (z dowoln± zawarto¶ci± za to
+   zbudowanego na podstawie pliku polish.aff). Mo¿na to osi±gn±æ w nastêpuj±cy
+   sposób:
+   1) 
+   $ cat > slowo
+   s³owo
+   ^D
+   2) 
+   $ buildhash slowo polish.aff slowo.hash
+   3) Teraz mo¿emy rozwin±æ wszystkie s³owa wystêpuj±ce np. w pliku A.
+   $ispell -e -d ./slowo.hash <A
+   ............
+   na ekranie pojawi± siê wszystkie rozwiniête s³owa
+   ............
+   4) A¿eby mieæ listê s³ów nale¿y spacje zamieniæ na znaki nowej linii, tak by
+   mieæ w ka¿dej linijce jedn± formê, nastêpnie wszystko to sortujemy i
+   przepuszczamy przez uniq i wrzucamy do pliku A.slowa
+   $ispell -e -d ./slowo.hash <A \
+   | perl -pe 's/\s/\n/g'| sort |uniq >A.slowa
+   Uwaga! Ca³y s³ownik daje oko³o 1,4 mln form i kilkunastomegabajtowy plik
+   wynikowy! Na przyk³ad w programie aspell (ta taki ,,lepszy'' ispell) daje 
+   to hash wielko¶ci 30MB!  
+
+Proszê wszystkich u¿ytkowników, którzy znale¼li sposób na efektywne
+wykorzystanie tego zestawu s³ów z dowolnym programem do sprawdzania 
+pisowni o informacjê o tym --- wraz z opisem jak to zrobiæ. Opis taki
+umie¶cimy wraz ze s³ownikiem jako instrukcja dla innych u¿ytkowników.
+
+5.  WSKAZÓWKI: CZEGO NIE NALE¯Y ROBIÆ !
+----------------------------------------------------------------------------
+UWAGA !UWAGA !UWAGA !UWAGA !UWAGA !UWAGA !UWAGA !UWAGA !UWAGA !UWAGA !UWAGA
+-----------------------------------------------------------------------------
+Proszê nie przepuszczaæ tego s³ownika przez ¿adne Makefile wziête nie
+wiadomo sk±d, gdy nie wiemy, co one bêd± chcia³y robiæ. W wiêkszo¶ci przypadków
+jedn± z faz bêdzie munchlist (program znajduj±cy automatycznie flagi dla
+danego zestawu s³ów i danego pliku aff). Mia³em ju¿ kilka sygna³ów od
+osób, które skar¿y³y, ¿e s³ownik nie dzia³a, bo jest za ma³o miejsca na dysku,
+pamiêci, etc. do zrobienia munchlist, sortowanie itp.
+
+Nie nale¿y te¿ w przypadku jêzyka polskiego u¿ywaæ skryptu findaffix. Dla
+zestawu s³ów mniejszego ni¿ 300 tys. (kilkukrotnie mniejszy zestaw ni¿ ten
+w s³owniku) 1GB pamiêci RAM jest stanowczo za ma³o, by skrypt ten dzia³a³.
+
+Dlatego te¿ je¿eli kto¶ wpadnie na jaki¶ ,,genialny'' pomys³ automatycznego
+przetworzenia s³ownika niech najpierw skonsultuje to ze mn± lub opisze swój
+pomys³ na li¶cie s³ownikowej.
+
+6.  JAK ZG£ASZAÆ B£ÊDY
+
+Rodzaje b³êdów:
+
+- b³êdy w polish.aff 
+
+- brak s³ów:
+  a) brak formy podstawowej (patrz w README co jest traktowane w s³owniku
+     jako forma podstawowa, z przyczyn praktycznych nie jest to w 100%
+     zgodne z gramatyk±)
+     
+  b) brak formy pobocznej (brak oflagowania)
+  
+
+- b³êdne s³owa (nieistniej±ce w polskim s³owniku)
+  Znowu mamy do czynienia z dwoma przypadkami --- albo jest to forma podstawowa,
+  wtedy wpisujemy j± do pliku o nazwie trash, albo jest to rozwiniêcie ---
+  wtedy mamy do czynienia z b³êdami w oflagowaniu. W drugim przypadku postêpujemy
+  tak samo jak z nowo dodawanymi s³owami, czyli dodajemy do s³owa prawid³owe flagi
+  do³±czmy do pliku (patrz wy¿ej) i wysy³amy.
+  
+  Przys³anie poprawki oznacza zgodê na:
+
+  - umieszczenie poprawki w s³owniku i rozprowadzanie jej na prawach licencji
+    GPL (lub innej, je¿eli licencja s³ownika siê zmieni) przez zespó³
+    pracuj±cy nad s³ownikiem;
+  - zgoda na umieszczenie danych zawartych w pliku id w README w¶ród autorów
+    s³ownika (znajduj± siê tam nazwiska i adresy osób, które przyczyni³y siê
+    do rozwoju s³ownika);
+
+
+7.  KONTAKT Z AUTORAMI S£OWNIKA
+
+Wszelkie uwagi dotycz±ce niniejszego s³ownika nale¿y kierowaæ do
+Miroslaw.Prywata@fuw.edu.pl, MACEWICZ@ia.pw.edu.pl
+   
+8. OSOBY, KTÓRE BRA£Y UDZIA£ W SPRAWDZANIU S£OWNIKA (adresy mog± byæ ju¿ nieaktualne,
+pochodz± z czasów, gdy prowadzone by³y prace)
+
+Zdecydowana wiêkszo¶æ prac nad s³ownikiem zosta³a wykonana przez W³odka
+Macewicza (dotyczy to zarówno rêcznego jak i automatycznego sprawdzania i 
+przetwarzania tekstów). Bez jego zaanga¿owania powstanie tego s³ownika
+nie by³oby mo¿liwe.
+
+Poni¿ej osoby, które w mniejszym, b±d¼ wiêkszym stopniu uczestniczy³y 
+w sprawdzaniu
+
+Artur Zgoda <azgoda@tcs.uni.wroc.pl>
+Piotr Gackiewicz <gacek@ds14.agh.edu.pl>
+Andrzej M. Ostruszka <ostruszk@order.if.uj.edu.pl>
+Lukasz Rewerenda <lrew@kki.net.pl>
+
+Lidia Szczêsowicz
+Kamila Stêpieñ
+
+9. PODZIÊKOWANIA
+
+- dla twórców Korridy
+Wojciech Czarnowski <wojtekcz@rodos.com.pl>
+Mariusz Czubek <mczubek@poczta.onet.pl>
+
+którzy udostêpnili swoje zasoby, co pozwoli³o poprawiæ i zwiêkszyæ objêto¶æ
+s³ownika prawie dwukrotnie
+
+- dla dr Magdaleny Derwojedowy
+która namówi³a studentki polonistyki do przejrzenia s³ownika
+
+- dla wszystkich, którzy w jakimkolwiek stopniu przyczynili siê do stworzenia
+tego s³ownika

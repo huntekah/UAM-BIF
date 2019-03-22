@@ -1,0 +1,18 @@
+20021127:
+
+- do wszystkich s³owników dopisana zosta³a czêsto¶æ wystêpowania wyrazów
+- zmieniony skrypt  generuj±cy s³ownik uwzglêdniaj±cy czêsto¶ci, 
+teraz polish.dic przez stworzeniem hasha jest generowany w kolejno¶ci
+czêsto¶ci wystêpowania wyrazów w jêzyku polskim (na pocz±tku s± wyrazy
+najczêstsze)
+- do³o¿ony polish.sup
+
+20021121:
+
+- zmiany w polish.aff
+- dodane wyrazy z programu do sprawdzania pisowni Korrida
+
+20011004:
+
+- zmiany w polish.aff (uwzglêdnione tablice odmian czasowników Saloniego)
+- zmiany w s³owniku
